@@ -1,0 +1,593 @@
+@extends('common.app')
+@section('content')
+    @php
+        $getState = Helper::getState();
+    @endphp
+    <div class="app-main flex-column flex-row-fluid " id="kt_app_main">
+        <div class="d-flex flex-column flex-column-fluid">
+
+            <!--begin::Toolbar-->
+            <div id="kt_app_toolbar" class="app-toolbar  py-3 py-lg-6 ">
+
+                <!--begin::Toolbar container-->
+                <div id="kt_app_toolbar_container" class="app-container  container-xxl d-flex flex-stack ">
+
+
+
+                    <!--begin::Page title-->
+                    <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
+                        <!--begin::Title-->
+                        <h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
+                            Getting Started
+                        </h1>
+                        <!--end::Title-->
+
+
+                        <!--begin::Breadcrumb-->
+                        <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                            <!--begin::Item-->
+                            <li class="breadcrumb-item text-muted">
+                                <a href="{{ url('/') }}" class="text-muted text-hover-primary">
+                                    Home </a>
+                            </li>
+                            <!--end::Item-->
+                            <!--begin::Item-->
+                            <li class="breadcrumb-item">
+                                <span class="bullet bg-gray-500 w-5px h-2px"></span>
+                            </li>
+                            <!--end::Item-->
+
+                            <!--begin::Item-->
+                            <li class="breadcrumb-item text-muted">
+                                Customers </li>
+                            <!--end::Item-->
+                            <!--begin::Item-->
+                            <li class="breadcrumb-item">
+                                <span class="bullet bg-gray-500 w-5px h-2px"></span>
+                            </li>
+                            <!--end::Item-->
+
+                            <!--begin::Item-->
+                            <li class="breadcrumb-item text-muted">
+                                Getting Started </li>
+                            <!--end::Item-->
+
+                        </ul>
+                        <!--end::Breadcrumb-->
+                    </div>
+                    <!--end::Page title-->
+
+                </div>
+                <!--end::Toolbar container-->
+            </div>
+            <!--end::Toolbar-->
+
+            <!--begin::Content container-->
+            <div id="kt_app_content_container" class="app-container  container-xxl ">
+                <!--begin::Card-->
+                <div class="card">
+
+
+                    <!--begin::Card body-->
+                    <div class="card-body py-4">
+
+
+                        <form id="customers_edit_form" action="{{ url('esh2/customers/edit') . $data->id }}" method="post"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <!--begin::Scroll-->
+                            <div class="d-flex flex-column scroll-y px-5 px-lg-10" id="kt_modal_add_user_scroll"
+                                data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-max-height="auto"
+                                data-kt-scroll-dependencies="#kt_modal_add_user_header"
+                                data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
+
+                                <div class="row">
+
+                                    <div class="col-md-3">
+                                        <!--begin::Input group-->
+                                        <div class="fv-row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="required fw-semibold fs-6 mb-2">Customer Status</label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <select id="clint_status" class="form-control form-control-solid mb-3 mb-lg-0"
+                                                name="clint_status">
+                                                <option value="1">Confirm</option>
+                                                <option value="0">Demo</option>
+                                            </select>
+                                            <!--end::Input-->
+                                        </div>
+                                        <!--end::Input group-->
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <!--begin::Input group-->
+                                        <div class="fv-row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="required fw-semibold fs-6 mb-2">Customer Name</label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <input type="text" name="name" id="name"
+                                                class="form-control form-control-solid mb-3 mb-lg-0"
+                                                placeholder="Customer name" value="{{ $data['name'] ?? '' }}" />
+                                            <!--end::Input-->
+                                        </div>
+                                        <!--end::Input group-->
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="required fw-semibold fs-6 mb-2">Mobile</label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <input type="tel" name="mobile" id="mobile"
+                                                class="form-control form-control-solid mb-3 mb-lg-0"
+                                                onkeypress="javascript:return isNumber(event)" placeholder="Mobile"
+                                                value="{{ $data['mobile'] ?? '' }}" />
+                                            <!--end::Input-->
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <!--begin::Label-->
+                                            <label class=" fw-semibold fs-6 mb-2">Mobile 2</label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <input type="tel" name="mobile2" id="mobile2"
+                                                class="form-control form-control-solid mb-3 mb-lg-0"
+                                                onkeypress="javascript:return isNumber(event)" placeholder="Mobile 2"
+                                                value="{{ $data['mobile2'] ?? '' }}" />
+                                            <!--end::Input-->
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <!--begin::Input group-->
+                                        <div class="fv-row mb-7">
+                                            <!--begin::Label-->
+                                            <label class=" fw-semibold fs-6 mb-2">Email</label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <input type="email" name="email" id="email"
+                                                class="form-control form-control-solid mb-3 mb-lg-0"
+                                                placeholder="example@domain.com" value="{{ $data['email'] ?? '' }}" />
+                                            <!--end::Input-->
+                                        </div>
+                                        <!--end::Input group-->
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <label class="required fw-semibold fs-6 mb-2">Project Name</label>
+                                            <input type="text" name="project_name" id="project_name"
+                                                class="form-control form-control-solid mb-3 mb-lg-0"
+                                                placeholder="Project Name" value="{{ $data['project_name'] ?? '' }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <label class="required fw-semibold fs-6 mb-2">Project Link</label>
+                                            <input type="text" name="project_link" id="project_link"
+                                                class="form-control form-control-solid mb-3 mb-lg-0"
+                                                placeholder="Project Link" value="{{ $data['project_link'] ?? '' }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <label class="required fw-semibold fs-6 mb-2">Domain Name</label>
+                                            <input type="text" name="domain_name" id="domain_name"
+                                                class="form-control form-control-solid mb-3 mb-lg-0"
+                                                placeholder="Domain Name" value="{{ $data['domain_name'] ?? '' }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <label class="required fw-semibold fs-6 mb-2">Project Mode</label>
+                                            <select id="project_mode" class="form-control form-control-solid mb-3 mb-lg-0"
+                                                name="project_mode">
+                                                <option value="">Select</option>
+                                                <option value="1"
+                                                    {{ 1 == old('project_mode', $data->project_mode) ? 'selected' : '' }}>
+                                                    Online</option>
+                                                <option value="2"
+                                                    {{ 2 == old('project_mode', $data->project_mode) ? 'selected' : '' }}>
+                                                    Offline</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <label class="required fw-semibold fs-6 mb-2">Project Type</label>
+                                            <select id="project_type" class="form-control form-control-solid mb-3 mb-lg-0"
+                                                name="project_type">
+                                                <option value=""
+                                                    {{ 0 == old('project_type', $data->project_type) ? 'selected' : '' }}>
+                                                    Select</option>
+                                                <option value="1"
+                                                    {{ 1 == old('project_type', $data->project_type) ? 'selected' : '' }}>
+                                                    Website</option>
+                                                <option value="2"
+                                                    {{ 2 == old('project_type', $data->project_type) ? 'selected' : '' }}>
+                                                    School</option>
+                                                <option value="3"
+                                                    {{ 3 == old('project_type', $data->project_type) ? 'selected' : '' }}>
+                                                    APK</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <label class="required fw-semibold fs-6 mb-2">Registration Date</label>
+                                            <input type="date" name="registration_date" id="registration_date"
+                                                class="form-control form-control-solid mb-3 mb-lg-0" placeholder=""
+                                                value="{{ $data['registration_date'] ?? '' }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <label class="required fw-semibold fs-6 mb-2">Domain Expiry Date</label>
+                                            <input type="date" name="domain_expire_date" id="domain_expire_date"
+                                                class="form-control form-control-solid mb-3 mb-lg-0" placeholder=""
+                                                value="{{ $data['domain_expire_date'] ?? '' }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <label class="required fw-semibold fs-6 mb-2">AMC Date</label>
+                                            <input type="date" name="amc_date" id="amc_date"
+                                                class="form-control form-control-solid mb-3 mb-lg-0" placeholder=""
+                                                value="{{ $data['emc_date'] ?? '' }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <label class="required fw-semibold fs-6 mb-2">AMC Amount</label>
+                                            <input type="tel" name="amc_amount" id="amc_amount"
+                                                class="form-control form-control-solid mb-3 mb-lg-0"
+                                                onkeypress="javascript:return isNumber(event)" placeholder="AMC Amount"
+                                                value="{{ $data['amc_amount'] ?? '' }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <label class="required fw-semibold fs-6 mb-2">State</label>
+                                            <select id="state_id" class="form-control form-control-solid mb-3 mb-lg-0"
+                                                name="state_id">
+                                                <option value="">Select</option>
+                                                @if (!empty($getState))
+                                                    @foreach ($getState as $state)
+                                                        <option value="{{ $state->id ?? '' }}"
+                                                            {{ $state->id == old('state_id', $data->state_id) ? 'selected' : '' }}>
+                                                            {{ $state->name ?? '' }}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <label class="required fw-semibold fs-6 mb-2">District</label>
+                                            <select id="city_id" class="form-control form-control-solid mb-3 mb-lg-0"
+                                                name="city_id">
+                                                <option value="">Select</option>
+                                                @if (!empty($getCity))
+                                                    @foreach ($getCity as $cities)
+                                                        <option value="{{ $cities->id ?? '' }}"
+                                                            {{ $cities->id == old('city_id', $data->city_id) ? 'selected' : '' }}>
+                                                            {{ $cities->name ?? '' }}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <label class="required fw-semibold fs-6 mb-2">Student Count</label>
+                                            <input type="tel" name="student_count" id="student_count"
+                                                class="form-control form-control-solid mb-3 mb-lg-0"
+                                                onkeypress="javascript:return isNumber(event)" placeholder="Student Count"
+                                                value="{{ $data['student_count'] ?? '' }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <label class="required fw-semibold fs-6 mb-2">User Count</label>
+                                            <input type="tel" name="user_count" id="user_count"
+                                                class="form-control form-control-solid mb-3 mb-lg-0"
+                                                onkeypress="javascript:return isNumber(event)" placeholder="User Count"
+                                                value="{{ $data['user_count'] ?? '' }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <label class="required fw-semibold fs-6 mb-2">Branch Count</label>
+                                            <input type="tel" name="branch_count" id="branch_count"
+                                                class="form-control form-control-solid mb-3 mb-lg-0"
+                                                onkeypress="javascript:return isNumber(event)" placeholder="Branch Count"
+                                                value="{{ $data['branch_count'] ?? '' }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <label class="required fw-semibold fs-6 mb-2">User Name</label>
+                                            <input type="text" name="userName" id="userName"
+                                                class="form-control form-control-solid mb-3 mb-lg-0"
+                                                placeholder="User Name" value="{{ $data['userName'] ?? '' }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <label class="required fw-semibold fs-6 mb-2">Password</label>
+                                            <input type="password" name="password" id="password"
+                                                class="form-control form-control-solid mb-3 mb-lg-0"
+                                                placeholder="Password" value="{{ $data['password'] ?? '' }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <label class=" fw-semibold fs-6 mb-2">Address</label>
+                                            <textarea name="address" id="address" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Address"
+                                                value="{{ $data['address'] ?? '' }}" />{{ $data['address'] ?? '' }}</textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <label class=" fw-semibold fs-6 mb-2">Plan Details</label>
+                                            <textarea name="plan_details" id="plan_details" class="form-control form-control-solid mb-3 mb-lg-0"
+                                                placeholder="Plan Details" value="{{ $data['plan_details'] ?? '' }}" />{{ $data['plan_details'] ?? '' }}</textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <!--begin::Label-->
+                                            <label class=" fw-semibold fs-6 mb-2">Remark</label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <textarea name="remark" id="remark" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Remark"
+                                                value="{{ $data['remark'] ?? '' }}" />{{ $data['remark'] ?? '' }}</textarea>
+                                            <!--end::Input-->
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <label class="d-block fw-semibold fs-6 mb-5">Project Avatar</label>
+                                            <style>
+                                                .image-input-placeholder {
+                                                    background-image: url("{{ env('IMAGE_SHOW_PATH') . 'assets/media/svg/files/blank-image.svg' }}");
+                                                }
+
+                                                [data-bs-theme="dark"] .image-input-placeholder {
+                                                    background-image: url("{{ env('IMAGE_SHOW_PATH') . 'assets/media/svg/files/blank-image-dark.svg' }}");
+                                                }
+                                            </style>
+                                            <!--end::Image placeholder-->
+                                            <!--begin::Image input-->
+                                            <div class="image-input image-input-outline image-input-placeholder"
+                                                data-kt-image-input="true">
+                                                <!--begin::Preview existing avatar-->
+                                                <div class="image-input-wrapper w-125px h-125px"
+                                                    style="background-image: url({{ env('IMAGE_SHOW_PATH') . 'assets/media/avatars/300-6.jpg' }});">
+                                                </div>
+                                                <!--end::Preview existing avatar-->
+
+                                                <!--begin::Label-->
+                                                <label
+                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                    data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                                    title="Change avatar">
+                                                    <i class="ki-duotone ki-pencil fs-7"><span class="path1"></span><span
+                                                            class="path2"></span></i>
+                                                    <!--begin::Inputs-->
+                                                    <input type="file" name="image" id="image"
+                                                        accept="" />
+                                                    <input type="hidden" name="avatar_remove" />
+                                                    <!--end::Inputs-->
+                                                </label>
+                                                <!--end::Label-->
+
+                                                <!--begin::Cancel-->
+                                                <span
+                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                    data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
+                                                    title="Cancel avatar">
+                                                    <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span
+                                                            class="path2"></span></i> </span>
+                                                <!--end::Cancel-->
+
+                                                <!--begin::Remove-->
+                                                <span
+                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                    data-kt-image-input-action="remove" data-bs-toggle="tooltip"
+                                                    title="Remove avatar">
+                                                    <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span
+                                                            class="path2"></span></i> </span>
+                                                <!--end::Remove-->
+                                            </div>
+                                            <!--end::Image input-->
+
+                                            <!--begin::Hint-->
+                                            <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                                            <!--end::Hint-->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="fv-row mb-7">
+                                            <label class="d-block fw-semibold fs-6 mb-5">Invoice Upload</label>
+                                            <style>
+                                                .image-input-placeholder {
+                                                    background-image: url("{{ env('IMAGE_SHOW_PATH') . 'assets/media/svg/files/blank-image.svg' }}");
+                                                }
+
+                                                [data-bs-theme="dark"] .image-input-placeholder {
+                                                    background-image: url("{{ env('IMAGE_SHOW_PATH') . 'assets/media/svg/files/blank-image-dark.svg' }}");
+                                                }
+                                            </style>
+                                            <!--end::Image placeholder-->
+                                            <!--begin::Image input-->
+                                            <div class="image-input image-input-outline image-input-placeholder"
+                                                data-kt-image-input="true">
+                                                <!--begin::Preview existing avatar-->
+                                                <div class="image-input-wrapper w-125px h-125px"
+                                                    style="background-image: url({{ env('IMAGE_SHOW_PATH') . 'assets/media/avatars/300-6.jpg' }});">
+                                                </div>
+                                                <!--end::Preview existing avatar-->
+
+                                                <!--begin::Label-->
+                                                <label
+                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                    data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                                    title="Change avatar">
+                                                    <i class="ki-duotone ki-pencil fs-7"><span class="path1"></span><span
+                                                            class="path2"></span></i>
+                                                    <!--begin::Inputs-->
+                                                    <input type="file" name="invoiceimage" id="invoiceimage"
+                                                        accept="" />
+                                                    <input type="hidden" name="avatar_remove" />
+                                                    <!--end::Inputs-->
+                                                </label>
+                                                <!--end::Label-->
+
+                                                <!--begin::Cancel-->
+                                                <span
+                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                    data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
+                                                    title="Cancel avatar">
+                                                    <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span
+                                                            class="path2"></span></i> </span>
+                                                <!--end::Cancel-->
+
+                                                <!--begin::Remove-->
+                                                <span
+                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                    data-kt-image-input-action="remove" data-bs-toggle="tooltip"
+                                                    title="Remove avatar">
+                                                    <i class="ki-duotone ki-cross fs-2"><span class="path1"></span><span
+                                                            class="path2"></span></i> </span>
+                                                <!--end::Remove-->
+                                            </div>
+                                            <!--end::Image input-->
+
+                                            <!--begin::Hint-->
+                                            <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                                            <!--end::Hint-->
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--end::Scroll-->
+
+                            <!--begin::Actions-->
+                            <div class="text-center pt-10">
+                                <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">
+                                    Discard
+                                </button>
+
+                                <button type="button" id="editCustomer" class="btn btn-primary"
+                                    data-kt-users-modal-action="submit">
+                                    <span class="indicator-label">
+                                        Update
+                                    </span>
+                                    <span class="indicator-progress">
+                                        Please wait... <span
+                                            class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                    </span>
+                                </button>
+                            </div>
+                            <!--end::Actions-->
+                        </form>
+
+                        <!--end::Table-->
+                    </div>
+                    <!--end::Card body-->
+                </div>
+                <!--end::Card-->
+            </div>
+            <!--end::Content container-->
+
+        </div>
+    </div>
+
+    <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+    <script src="{{ URL::asset('public/assets/plugins/global/plugins.bundle.js') }}"></script>
+    <script src="{{ URL::asset('public/assets/js/scripts.bundle.js') }}"></script>
+    <!--end::Global Javascript Bundle-->
+
+
+    <script>
+        $(document).ready(function() {
+
+            var customerId = '{{ $data->id ?? '' }}';
+
+            $('#editCustomer').click(function() {
+
+                var formData = new FormData($("#customers_edit_form")[0]);
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: baseurl + '/esh2/customers/edit/' + customerId,
+                    method: 'post',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+
+                        response.status == 1 ?
+                        Swal.fire({
+                            text: "Customer New Details Updated Successfully!",
+                            icon: "success",
+                            buttonsStyling: !1,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-primary"
+                            },
+                        }).then(function() {
+                            window.location.href =
+                            '/esh2/customers/list'; // No trailing slash at the end
+                        }) :
+                        "cancel" === t.dismiss &&
+                        Swal.fire({
+                            text: "Sorry, looks like there are some errors detected, please try again. \n" +
+                                response.message,
+                            icon: "error",
+                            buttonsStyling: !1,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-primary"
+                            },
+                        });
+                    }
+                });
+
+            });
+        });
+    </script>
+
+@endsection
